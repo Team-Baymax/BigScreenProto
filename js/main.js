@@ -64,3 +64,18 @@ $('.btn').click(function(){
     $('.btn-active').addClass('hide');
     $(this).find(".btn-active").removeClass('hide');
 });
+
+Leap.loop(function(frame){
+    // Leap Update Loop
+    
+    // Exit loop if no hand in view
+    if(frame.hands.length < 1) return;
+    // Move first widget
+    transformElement( $('.widget').get(0), frame.hands[0].palmPosition[0], - frame.hands[0].palmPosition[1] );
+});
+
+// TODO: Better Architecture
+function transformElement( pElement, x, y ) {
+    var transformStyle = "translateX(" + x + "px)" + " translateY(" + y + "px)"
+    pElement.style.transform = transformStyle;
+}
